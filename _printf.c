@@ -11,7 +11,6 @@ int _printf(const char *format, ...)
 	unsigned int i, j, k, count;
 	char formatList[] = "csdi";
 	char *str, str2[2], ch, *str1, myInt[2];
-	char* itoa(int, char* , int);
 	va_list list;
 
 	for (count = 0; format[count]; count++)
@@ -49,8 +48,7 @@ int _printf(const char *format, ...)
 				}
 				else if (str[i + 1] == 'd' || str[i + 1] == 'i')
 				{
-					itoa(va_arg(list, int), myInt, 10);
-					write(1, myInt, 1);
+					print_de(va_arg(list, int));
 					i++;
 				}
 			}
