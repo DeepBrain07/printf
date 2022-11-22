@@ -16,6 +16,11 @@ int _printf(const char *format, ...)
 		;
 	va_start(list, format);
 
+	if (format == NULL)
+	{
+		write(1, "", 1);
+		return (0);
+	}
 	for (i = 0; format && format[i]; i++)
 	{
 		if (format[i] == '%')
@@ -35,6 +40,8 @@ int _printf(const char *format, ...)
 				write(1, str1, k);
 				i++;
 			}
+			else if (!(format[i + 1]))
+				write(1, "", 1);
 			else if (format[i + 1] == 'd' || format[i + 1] == 'i')
 			{
 				print_de(va_arg(list, int));
