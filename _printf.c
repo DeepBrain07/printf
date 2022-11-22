@@ -18,8 +18,7 @@ int _printf(const char *format, ...)
 
 	if (format == NULL)
 	{
-		write(1, "", 1);
-		return (0);
+		return (-1);
 	}
 	for (i = 0; format && format[i]; i++)
 	{
