@@ -9,8 +9,7 @@
 int _printf(const char *format, ...)
 {
 	unsigned int i, j, k, count;
-	char formatList[] = "csdi";
-	char *str, str2[2], ch, *str1, myInt[2];
+	char *str, str2[2], ch, *str1;
 	va_list list;
 
 	for (count = 0; format[count]; count++)
@@ -29,29 +28,34 @@ int _printf(const char *format, ...)
 	for (i = 0; str[i]; i++)
 	{
 		if (str[i] == '%')
-			for (j = 0; formatList[j]; j++)
+		{
+			if (str[i + 1] == 'c')
 			{
-				if (str[i + 1] == 'c')
-				{
-					ch = va_arg(list, int);
-					str2[0] = ch;
-					write(1, str2, 1);
-					i++;
-				}
-				else if (str[i + 1] == 's')
-				{
-					str1 = va_arg(list, char *);
-					for (k = 0; str1[k]; k++)
-						;
-					write(1, str1, k);
-					i++;
-				}
-				else if (str[i + 1] == 'd' || str[i + 1] == 'i')
-				{
-					print_de(va_arg(list, int));
-					i++;
-				}
+				ch = va_arg(list, int);
+				str2[0] = ch;
+				write(1, str2, 1);
+				i++;
 			}
+			else if (str[i + 1] == 's')
+			{
+				str1 = va_arg(list, char *);
+				for (k = 0; str1[k]; k++)
+					;
+				write(1, str1, k);
+				i++;
+			}
+			else if (str[i + 1] == 'd' || str[i + 1] == 'i')
+			{
+				print_de(va_arg(list, int));
+				i++;
+			}
+			else
+			{
+				str2[0] = str[i];
+				write(1, str2, 1);
+				i++;
+			}
+		}
 		else
 		{
 			str2[0] = str[i];
