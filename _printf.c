@@ -62,5 +62,5 @@ int _printf(const char *format, ...)
 
 	va_end(list);
 
-	return (count);
+	return (count - 1);
 }
